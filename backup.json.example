@@ -1,0 +1,16 @@
+[
+  {
+    "containers": ["ContainerName1"],
+    "src_dir": "/docker-data/ContainerName1",
+    "dst_dir": "remote:/ContainerName1",
+    "stop": true,
+    "daysToKeep": 30
+  },
+  {
+    "containers": ["ContainerName1", "ContainerName2"],
+    "src_dir": "/docker-data/ContainerName2",
+    "dst_dir": "remote:/ContainerName2",
+    "stop": false,
+    "daysToKeep": 0
+  }
+]

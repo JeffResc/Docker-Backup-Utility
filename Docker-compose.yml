@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: Backup
+    volumes:
+    - ./rclone:/root/.config/rclone
+    - ./backup.json:/root/backup.json:ro
+    - /etc/localtime:/etc/localtime:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /docker-data:/docker-data:ro
