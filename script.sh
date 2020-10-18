@@ -7,6 +7,7 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     dst_dir=$(echo $backup | jq -r '.dst_dir')
     stop=$(echo $backup | jq -r '.stop')
     daysToKeep=$(echo $backup | jq -r '.daysToKeep')
+    password=$(echo $backup | jq -r '.password')
 
     # Extra variables
     nowDate=$(date +'%F')
@@ -39,7 +40,7 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     # Create zip
     echo "Creating /tmp/${fullName}.zip"
     cd /tmp/${fullName}
-    zip -r "/tmp/${fullName}.zip" .
+    zip -p ${password} -r "/tmp/${fullName}.zip" .
 
     # Upload zip
     echo "Uploading /tmp/${fullName}.zip"
