@@ -37,14 +37,17 @@ for backup in $(jq -c '.[]' /root/backup.json); do
         done
     fi
 
-    # Create zip
-    echo "Creating /tmp/${fullName}.zip"
-    cd /tmp/${fullName}
-    zip -p ${password} -r "/tmp/${fullName}.zip" .
+    # Create tar
+    echo "Creating /tmp/${fullName}.tar.gz"
+    tar -czvf /tmp/${fullName}.tar.gz /tmp/${fullName}
 
-    # Upload zip
-    echo "Uploading /tmp/${fullName}.zip"
-    rclone move "/tmp/${fullName}.zip" "${dst_dir}"
+    # Encrypt tar
+    gpg --yes --batch --passphrase=${password} -c /tmp/${fullName}.tar.gz
+    rm /tmp/${fullName}.tar.gz
+
+    # Upload tar
+    echo "Uploading /tmp/${fullName}.tar.gz.gpg"
+    rclone move "/tmp/${fullName}.tar.gz.gpg" "${dst_dir}"
 
     # Remove extra files
     rm -rf /tmp/${fullName}
@@ -52,7 +55,7 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     # Remove old backups
     if [ "$daysToKeep" != 0 ] ; then
         oldDate=$(date --date="${daysToKeep} days ago" +'%F')
-        echo "Deleting ${dst_dir}${name}-${oldDate}.zip"
-        rclone deletefile "${dst_dir}${name}-${oldDate}.zip"
+        echo "Deleting ${dst_dir}${name}-${oldDate}.tar.gz.gpg"
+        rclone deletefile "${dst_dir}${name}-${oldDate}.tar.gz.gpg"
     fi
 done
