@@ -14,5 +14,10 @@ For this example I will assume the following things:
 ## The Command
 Use the following command as a template for your backup, ensuring to modify it to your needs following the assumtions guide above.
 ```bash
-docker run --rm -v ~/Docker-Backup-Utility/rclone:/root/.config/rclone -v ~/Docker-Backup-Utility/backup.json:/root/backup.json:ro /var/docker-data:/docker-data:ro -v /var/run/docker.sock:/var/run/docker.sock:ro jeffresc/docker-backup-utility:latest
+docker run --rm \
+           -v ~/Docker-Backup-Utility/rclone:/root/.config/rclone \
+           -v ~/Docker-Backup-Utility/backup.json:/root/backup.json:ro \
+           -v /var/docker-data:/docker-data:ro \
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           jeffresc/docker-backup-utility:latest
 ```
