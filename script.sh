@@ -47,7 +47,7 @@ for backup in $(jq -c '.[]' /root/backup.json); do
 
     # Upload tar
     echo "Uploading /tmp/${fullName}.tar.gz.gpg"
-    rclone move "/tmp/${fullName}.tar.gz.gpg" "${dst_dir}"
+    rclone move -v "/tmp/${fullName}.tar.gz.gpg" "${dst_dir}"
 
     # Remove extra files
     rm -rf /tmp/${fullName}
@@ -56,6 +56,6 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     if [ "$daysToKeep" != 0 ] ; then
         oldDate=$(date --date="${daysToKeep} days ago" +'%F')
         echo "Deleting ${dst_dir}${name}-${oldDate}.tar.gz.gpg"
-        rclone deletefile "${dst_dir}${name}-${oldDate}.tar.gz.gpg"
+        rclone -v deletefile "${dst_dir}${name}-${oldDate}.tar.gz.gpg"
     fi
 done
