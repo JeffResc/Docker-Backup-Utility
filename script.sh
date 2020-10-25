@@ -7,7 +7,6 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     dst_dir=$(echo $backup | jq -r '.dst_dir')
     stop=$(echo $backup | jq -r '.stop')
     daysToKeep=$(echo $backup | jq -r '.daysToKeep')
-    password=$(echo $backup | jq -r '.password')
 
     # Extra variables
     nowDate=$(date +'%F')
