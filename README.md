@@ -1,5 +1,5 @@
 # Docker-Backup-Utility
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jeffresc/docker-backup-utility?style=for-the-badge)](https://hub.docker.com/repository/docker/jeffresc/docker-backup-utility) [![GitHub last commit](https://img.shields.io/github/last-commit/JeffResc/Docker-Backup-Utility?style=for-the-badge)](https://github.com/JeffResc/Docker-Backup-Utility)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jeffresc/docker-backup-utility?style=for-the-badge)](https://hub.docker.com/r/jeffresc/docker-backup-utility) [![GitHub last commit](https://img.shields.io/github/last-commit/JeffResc/Docker-Backup-Utility?style=for-the-badge)](https://github.com/JeffResc/Docker-Backup-Utility)
 
 A custom Docker backup utility to backup Docker containers using [rclone](https://rclone.org/).
 
