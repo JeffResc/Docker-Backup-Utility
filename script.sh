@@ -41,13 +41,9 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     echo "Creating /tmp/${fullName}.tar.gz"
     tar -czvf /tmp/${fullName}.tar.gz /tmp/${fullName}
 
-    # Encrypt tar
-    gpg --yes --batch --passphrase=${password} -c /tmp/${fullName}.tar.gz
-    rm /tmp/${fullName}.tar.gz
-
     # Upload tar
-    echo "Uploading /tmp/${fullName}.tar.gz.gpg"
-    rclone move -v "/tmp/${fullName}.tar.gz.gpg" "${dst_dir}"
+    echo "Uploading /tmp/${fullName}.tar.gz"
+    rclone move -v "/tmp/${fullName}.tar.gz" "${dst_dir}"
 
     # Remove extra files
     rm -rf /tmp/${fullName}
@@ -55,7 +51,7 @@ for backup in $(jq -c '.[]' /root/backup.json); do
     # Remove old backups
     if [ "$daysToKeep" != 0 ] ; then
         oldDate=$(date --date="${daysToKeep} days ago" +'%F')
-        echo "Deleting ${dst_dir}${name}-${oldDate}.tar.gz.gpg"
-        rclone -v deletefile "${dst_dir}${name}-${oldDate}.tar.gz.gpg"
+        echo "Deleting ${dst_dir}${name}-${oldDate}.tar.gz"
+        rclone -v deletefile "${dst_dir}${name}-${oldDate}.tar.gz"
     fi
 done
