@@ -1,4 +1,4 @@
-FROM alpine:3.13.1
+FROM alpine:3.13.2
 LABEL maintainer="jeff@jeffresc.dev"
 
 RUN apk update --no-cache && apk add --no-cache docker-cli rclone jq coreutils
